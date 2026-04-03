@@ -20,8 +20,8 @@ const Admin = () => {
     const fetchAll = async () => {
       const [p, b, pay, h] = await Promise.all([
         supabase.from('profiles').select('*').order('created_at', { ascending: false }),
-        supabase.from('bookings').select('*, hotels(name), profiles!bookings_user_id_fkey(full_name)').order('created_at', { ascending: false }),
-        supabase.from('payments').select('*, bookings(hotels(name)), profiles!payments_user_id_fkey(full_name)').order('created_at', { ascending: false }),
+        supabase.from('bookings').select('*, hotels(name)').order('created_at', { ascending: false }),
+        supabase.from('payments').select('*').order('created_at', { ascending: false }),
         supabase.from('hotels').select('*').order('created_at', { ascending: false }),
       ]);
       if (p.data) setProfiles(p.data);
